@@ -6,20 +6,20 @@ export const loginInfo = [{
     user: "zc_2025",
     password: "123456789"
 }, {
-    user: "1",
-    password: "1"
+    user: "cqs_admin",
+    password: "!Aa123456"
 }]
 
 export const menuInfo = [
     {
-        SubmenuName: "car", //一级菜单唯一标识用于展开和收缩菜单
+        SubmenuName: "encapsulation", //一级菜单唯一标识用于展开和收缩菜单
         SubmenuIconType: "ios-navigate", //一级菜单图标
-        SubmenuContentName: "车辆管理", //一级菜单名称
+        SubmenuContentName: "封装菜单", //一级菜单名称
         routerLink: [
             {
-                to: "/analyzecarcard", //点击二级菜单跳转路由
-                MenuItemName: "analyzecarcard", //二级菜单唯一标识
-                MenuItemContentName: "车辆维护", //二级菜单名称
+                to: "/encapsulationlist", //点击二级菜单跳转路由
+                MenuItemName: "encapsulationlist", //二级菜单唯一标识
+                MenuItemContentName: "列表封装", //二级菜单名称
             }
         ]
     },

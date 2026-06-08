@@ -58,8 +58,8 @@ export default {
       }
 
       // 如果没有匹配的菜单项，设置默认值
-      this.activeMenuName = this.activeMenuName || 'managementcarcard';
-      this.openSubmenuNames = this.openSubmenuNames.length ? this.openSubmenuNames : ['car'];
+      this.activeMenuName = this.activeMenuName || 'encapsulationlist';
+      this.openSubmenuNames = this.openSubmenuNames.length ? this.openSubmenuNames : ['encapsulation'];
     }
   }
 }

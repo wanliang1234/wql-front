@@ -1,8 +1,8 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import Login from '@/views/loginpage/index.vue'
 import HomePage from '@/views/homepage/index.vue'
-import AnalyzeCarCard from '@/views/carcard/analyze/index.vue'
-import AnalyzeCarCardDetail from '@/views/carcard/analyze/detail.vue'
+import EncapsulationList from '@/views/encapsulation/list/index.vue'
+import EncapsulationListDetail from '@/views/encapsulation/list/detail.vue'
 import ListAddCard from '@/views/example/list-add/index.vue'
 import TreeCard from '@/views/example/tree/index.vue'
 import EditorCard from '@/views/example/editor/index.vue'
@@ -24,20 +24,21 @@ const routes = [
     {
         path: '/homepage',
         name: 'HomePage',
+        redirect: '/encapsulationlist',
         component: HomePage,
         children: [ // 子路由：仅渲染在 HomePage 的 <router-view> 里
             //车辆管理----------
             {
-                path: '/analyzecarcard',
-                name: 'AnalyzeCarCard',
-                component: AnalyzeCarCard,
-                meta: {title: '车辆维护'}
+                path: '/encapsulationlist',
+                name: 'EncapsulationList',
+                component: EncapsulationList,
+                meta: {title: '列表封装'}
             },
             {
-                path: '/analyzecarcarddetail',
-                name: 'AnalyzeCarCardDetail',
-                component: AnalyzeCarCardDetail,
-                meta: {title: '车辆分析明细'}
+                path: '/encapsulationlistdetail',
+                name: 'EncapsulationListDetail',
+                component: EncapsulationListDetail,
+                meta: {title: '列表封装明细'}
             },
             //示例-------------------
             {
