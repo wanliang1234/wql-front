@@ -25,8 +25,8 @@ export const menuInfo = [
     },
     {
         SubmenuName: "example",
-        SubmenuIconType: "ios-navigate",
-        SubmenuContentName:"示例",
+        SubmenuIconType: "ios-keypad",
+        SubmenuContentName:"示例菜单",
         routerLink:[
             {
                 to:"/listaddcard",
