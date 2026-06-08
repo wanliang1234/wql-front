@@ -1,11 +1,11 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import LoginPage from '@/views/loginpage/index.vue'
 import HomePage from '@/views/homepage/index.vue'
-import ManagementCarCard from '@/views/carcard/management/index.vue'
 import AnalyzeCarCard from '@/views/carcard/analyze/index.vue'
 import AnalyzeCarCardDetail from '@/views/carcard/analyze/detail.vue'
-import ManagementCigaretteCard from '@/views/cigarettecard/management/index.vue'
-import AnalyzeCigaretteCard from '@/views/cigarettecard/analyze/index.vue'
+import ListAddCard from '@/views/example/list-add/index.vue'
+import TreeCard from '@/views/example/tree/index.vue'
+import EditorCard from '@/views/example/editor/index.vue'
 
 
 const routes = [
@@ -19,17 +19,12 @@ const routes = [
     name: 'HomePage',
     component: HomePage,
     children: [ // 子路由：仅渲染在 HomePage 的 <router-view> 里
-      {
-        path: '/managementcarcard',
-        name: 'ManagementCarCard',
-        component: ManagementCarCard,
-        meta: {title: '车辆管理'}
-      },
+        //车辆管理----------
       {
         path: '/analyzecarcard',
         name: 'AnalyzeCarCard',
         component: AnalyzeCarCard,
-        meta: {title: '车辆分析'}
+        meta: {title: '车辆维护'}
       },
       {
         path: '/analyzecarcarddetail',
@@ -37,17 +32,24 @@ const routes = [
         component: AnalyzeCarCardDetail,
         meta: {title: '车辆分析明细'}
       },
+        //示例-------------------
       {
-        path: '/managementcigarettecard',
-        name: 'ManagementCigaretteCard',
-        component: ManagementCigaretteCard,
-        meta: {title: '卷烟管理'}
+        path: '/listaddcard',
+        name: 'ListAddCard',
+        component: ListAddCard,
+        meta: {title: '编辑列表示例'}
       },
       {
-        path: '/analyzecigarettecard',
-        name: 'AnalyzeCigaretteCard',
-        component: AnalyzeCigaretteCard,
-        meta: {title: '卷烟分析'}
+        path: '/treecard',
+        name: 'TreeCard',
+        component: TreeCard,
+        meta: {title: '树状结构示例'}
+      },
+      {
+        path: '/editorcard',
+        name: 'EditorCard',
+        component: EditorCard,
+        meta: {title: '编辑器示例'}
       }
     ]
   },

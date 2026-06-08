@@ -17,31 +17,31 @@ export const menuInfo = [
         SubmenuContentName:"车辆管理", //一级菜单名称
         routerLink:[
             {
-                to:"/managementcarcard", //点击二级菜单跳转路由
-                MenuItemName:"managementcarcard", //二级菜单唯一标识
-                MenuItemContentName:"车辆管理", //二级菜单名称
-            },
-            {
-                to:"/analyzecarcard",
-                MenuItemName:"analyzecarcard",
-                MenuItemContentName:"车辆分析",
+                to:"/analyzecarcard", //点击二级菜单跳转路由
+                MenuItemName:"analyzecarcard", //二级菜单唯一标识
+                MenuItemContentName:"车辆维护", //二级菜单名称
             }
         ]
     },
     {
-        SubmenuName: "cigarette",
+        SubmenuName: "example",
         SubmenuIconType: "ios-navigate",
-        SubmenuContentName:"卷烟管理",
+        SubmenuContentName:"示例",
         routerLink:[
             {
-                to:"/managementcigarettecard",
-                MenuItemName:"managementcigarettecard",
-                MenuItemContentName:"卷烟管理",
+                to:"/listaddcard",
+                MenuItemName:"listaddcard",
+                MenuItemContentName:"编辑列表示例",
             },
             {
-                to:"/analyzecigarettecard",
-                MenuItemName:"analyzecigarettecard",
-                MenuItemContentName:"卷烟分析",
+                to:"/treecard",
+                MenuItemName:"treecard",
+                MenuItemContentName:"树状结构示例",
+            },
+            {
+                to:"/editorcard",
+                MenuItemName:"editorcard",
+                MenuItemContentName:"编辑器示例",
             }
         ]
     },

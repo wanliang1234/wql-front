@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div>卷烟分析</div>
+  <div>编辑器</div>
 </template>
 
 <style scoped>
