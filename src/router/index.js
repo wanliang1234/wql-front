@@ -20,6 +20,7 @@ const routes = [
         name: 'Login',
         component: Login
     },
+    //菜单页面
     {
         path: '/homepage',
         name: 'HomePage',
