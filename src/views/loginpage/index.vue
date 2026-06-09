@@ -47,14 +47,15 @@
 </template>
 
 <script>
-import {loginInfo} from '@/utils/dataUtils'
+import {twoServer} from '@/utils/dataUtils'
+import axios from 'axios';
 
 export default {
   name: 'LoginPage',
   data() {
     return {
       loading: false,
-      isSuccess: false,
+      token: null,
       formData: {
         username: '',
         password: ''
@@ -74,22 +75,28 @@ export default {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.loading = true
-          loginInfo.forEach(item => {
-            if (item.user === this.formData.username && item.password === this.formData.password) {
+          axios({
+            url: twoServer + '/user/jwtToken',
+            method: 'post',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            data: this.formData,
+          }).then((resp) => {
+            this.token = resp.data || [];
+            if (this.token) {
               this.$Message.success('登录成功!')
-              this.isSuccess = true;
               this.$router.push({
                 path: "/homepage"
               })
-              return;
+            } else {
+              this.$Message.success('账号或密码错误!');
             }
-          })
-          if (this.isSuccess) {
-            this.isSuccess = false;
-          } else {
-            this.$Message.success('账号或密码错误!');
-          }
-          this.loading = false
+          }).catch((err) => {
+            this.$Message.error('信息获取失败!');
+          }).finally(() => {
+            this.loading = false
+          });
         } else {
           this.$Message.error('请填写正确的登录信息!')
         }
