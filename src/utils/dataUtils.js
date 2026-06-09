@@ -10,6 +10,10 @@ export const loginInfo = [{
     password: "!Aa123456"
 }]
 
+//two后端地址
+export const twoServer = "http://localhost:8012";
+
+//菜单 已弃用  改用了数据库查询
 export const menuInfo = [
     {
         SubmenuName: "encapsulation", //一级菜单唯一标识用于展开和收缩菜单
