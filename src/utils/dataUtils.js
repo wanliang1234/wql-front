@@ -1,18 +1,3 @@
-//登录账号和密码
-export const loginInfo = [{
-    user: "wql_2025",
-    password: "123456789"
-}, {
-    user: "zc_2025",
-    password: "123456789"
-}, {
-    user: "cqs_admin",
-    password: "!Aa123456"
-}]
-
-//two后端地址
-export const twoServer = "http://localhost:8012";
-
 //菜单 已弃用  改用了数据库查询
 export const menuInfo = [
     {

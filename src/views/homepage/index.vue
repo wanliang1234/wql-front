@@ -42,8 +42,7 @@
 </template>
 
 <script>
-import {twoServer} from "@/utils/dataUtils.js"
-import axios from 'axios';
+import request from "@/utils/request";
 
 export default {
   name: 'HomePage',
@@ -72,10 +71,9 @@ export default {
   methods: {
     // 获取后端菜单数据
     initData() {
-      axios({
-        url: twoServer + '/menu/tree',
+      request({
+        url: '/menu/tree',   // 你的接口路径
         method: 'get',
-        headers: {},
         params: {},
       }).then((resp) => {
         this.menuData = resp.data || [];

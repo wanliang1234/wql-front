@@ -47,15 +47,13 @@
 </template>
 
 <script>
-import {twoServer} from '@/utils/dataUtils'
-import axios from 'axios';
+import request from '@/utils/request'
 
 export default {
   name: 'LoginPage',
   data() {
     return {
       loading: false,
-      token: null,
       formData: {
         username: '',
         password: ''
@@ -70,35 +68,40 @@ export default {
       }
     }
   },
+  mounted() {
+    //进来先判断token是否存在，存在就清空
+    let tokenOdl = localStorage.getItem('satoken');
+    if (tokenOdl) {
+      localStorage.removeItem('satoken');
+    }
+  },
   methods: {
     handleLogin() {
       this.$refs.loginForm.validate((valid) => {
         if (valid) {
           this.loading = true
-          axios({
-            url: twoServer + '/user/jwtToken',
+          request({
+            url: '/user/jwtToken',
             method: 'post',
-            headers: {
-              'Content-Type': 'application/json'
-            },
             data: this.formData,
           }).then((resp) => {
-            this.token = resp.data || [];
-            if (this.token) {
+            let token = resp.data.token.tokenValue
+            if (token) {
+              // 存储 token（key 必须与 request 拦截器中读取的 key 一致）
+              localStorage.setItem('satoken', token)
               this.$Message.success('登录成功!')
-              this.$router.push({
-                path: "/homepage"
-              })
+              this.$router.push({path: "/homepage"})  //登录后跳转的页面
             } else {
-              this.$Message.success('账号或密码错误!');
+              this.$Message.error('账号或密码错误！')
             }
           }).catch((err) => {
-            this.$Message.error('信息获取失败!');
+            console.error(err)
+            this.$Message.error('登录失败，请稍后重试！')
           }).finally(() => {
             this.loading = false
-          });
+          })
         } else {
-          this.$Message.error('请填写正确的登录信息!')
+          this.$Message.error('请填写正确的登录信息！')
         }
       })
     }
