@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import request from '@/utils/request'
+import axios from 'axios'
 
 export default {
   data() {
@@ -20,42 +20,61 @@ export default {
     async downloadPdf() {
       this.loading = true
       try {
-        const response = await request({
-          url: '/two/signature/export',  // 你的后端接口
+        const response = await axios({
+          url: 'http://localhost:8012/two/signature/export',
           method: 'get',
           responseType: 'blob',  // 重要：设置响应类型为blob
           timeout: 30000
         })
 
-        // 注意：因为你的request拦截器返回的是 response.data
-        // 所以这里的response已经是blob数据了
+        // 检查HTTP状态码
+        if (response.status !== 200) {
+          throw new Error(`请求失败: ${response.status}`)
+        }
+
+        // 获取blob数据（关键：response.data才是blob）
+        const blob = response.data
+
+        // 检查blob类型，如果是text/html说明后端返回了错误页面
+        if (blob.type === 'text/html') {
+          // 读取错误信息
+          const text = await blob.text()
+          console.error('后端返回错误:', text)
+          throw new Error('后端生成PDF失败，请检查后端日志')
+        }
 
         // 检查是否有数据
-        if (!response || response.size === 0) {
+        if (!blob || blob.size === 0) {
           throw new Error('文件为空')
         }
 
-        // 创建blob对象
-        const blob = new Blob([response], {type: 'application/pdf'})
+        // 验证PDF文件头（PDF文件以 %PDF 开头）
+        if (blob.size > 0) {
+          const header = await blob.slice(0, 4).text()
+          if (!header.startsWith('%PDF')) {
+            console.error('文件头:', header)
+            throw new Error('生成的文件不是有效的PDF格式')
+          }
+        }
 
-        // 创建下载链接
-        const url = window.URL.createObjectURL(blob)
+        // 创建下载链接（注意：使用blob，不需要再包装一次）
+        const downloadUrl = window.URL.createObjectURL(blob)
         const link = document.createElement('a')
-        link.href = url
-        link.download = '用户信息导出.pdf'  // 下载文件名
+        link.href = downloadUrl
+        link.download = `用户信息导出_${new Date().getTime()}.pdf`
         document.body.appendChild(link)
         link.click()
 
         // 清理
         document.body.removeChild(link)
-        window.URL.revokeObjectURL(url)
+        window.URL.revokeObjectURL(downloadUrl)
 
         // 成功提示
-        this.$Message?.success('导出成功')
+        this.$message?.success('导出成功')
 
       } catch (error) {
         console.error('导出失败:', error)
-        this.$Message?.error(error.message || '导出失败，请重试')
+        this.$message?.error(error.message || '导出失败，请重试')
       } finally {
         this.loading = false
       }
