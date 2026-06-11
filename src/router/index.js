@@ -6,6 +6,7 @@ import EncapsulationListDetail from '@/views/encapsulation/list/detail.vue'
 import ListAddCard from '@/views/example/list-add/index.vue'
 import TreeCard from '@/views/example/tree/index.vue'
 import EditorCard from '@/views/example/editor/index.vue'
+import PdfCard from '@/views/example/pdf/index.vue'
 
 
 const routes = [
@@ -57,6 +58,12 @@ const routes = [
                 path: '/editorcard',
                 name: 'EditorCard',
                 component: EditorCard,
+                meta: {title: '编辑器示例'}
+            },
+            {
+                path: '/pdfcard',
+                name: 'PdfCard',
+                component: PdfCard,
                 meta: {title: '编辑器示例'}
             }
         ]
